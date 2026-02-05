@@ -1,12 +1,5 @@
-// Clientes para interactuar con la API de AWS
-
-import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, QueryCommand } from "@aws-sdk/lib-dynamodb";
-const client = new DynamoDBClient({});
-const ddbDocClient = DynamoDBDocumentClient.from(client);
-
-// Obtener el nombre de la tabla de DynamoDB a partir de la variable de entorno
-const tableName = process.env.APP_TABLE;
+// Librería de funciones auxiliares
+import * as libreria from "../auxFunctions.mjs";
 
 // Integraremos la función lambda en modo Proxy con API Gateway
 // https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
@@ -30,7 +23,7 @@ export const handler = async (event) => {
   // Si no tenemos Cognito conectado, lo que haremos será definir un usuario
   // de ejemplo, llamado "testuser". Así, durante la fase de desarrollo, todas
   // las notas estarán referenciadas a este usuario de test
-  let userId, email, username;
+  var userId, email, username;
   try {
     const userClaims = event.requestContext.authorizer.claims;
 
@@ -45,33 +38,31 @@ export const handler = async (event) => {
     username = "testuser";
   }
 
-  // Parámetros de la petición de DynamoDB
-  // Hacemos una query indicando una condición de igualdad en la clave de partición
-  // Asumiendo que el esquema de la tabla haga referencia al userId como valor de la
-  // clave de partición
-  var params = {
-    TableName: tableName,
-    ExpressionAttributeValues: {
-      ":pk": userId,
-    },
-    KeyConditionExpression: "PK = :pk",
-  };
+  var response;
 
-  // Petición a DynamoDB
   try {
-    const data = await ddbDocClient.send(new QueryCommand(params));
-    var items = data.Items;
+    // Llamamos a la función de la librería encargada de devolver las notas de un usuario
+    var items = await libreria.getNotesByUser(userId);
+
+    // Si la consulta no genera error, devolvemos el listado de elementos y código 200
+    // Resultado que devuelve la función, de acuerdo con el formato descrito en la documentación:
+    // https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
+    response = {
+      statusCode: 200,
+      body: JSON.stringify(items),
+    };
   } catch (err) {
     console.log("Error", err);
+    // Si la consulta genera error, devolvemos una descripción del error y código 400, con el mismo formato
+    response = {
+      statusCode: 400,
+      body: JSON.stringify(err),
+    };
   }
 
-  const response = {
-    statusCode: 200,
-    body: JSON.stringify(items),
-  };
-
   console.info(
-    `Respuesta de: ${event.path}; código: ${response.statusCode}; cuerpo (datos): ${response.body}`,
+    `Petición a ruta: ${event.path}; código de estado: ${response.statusCode}; datos devueltos: ${response.body}; usuario logueado: ${userId}`,
   );
+
   return response;
 };
