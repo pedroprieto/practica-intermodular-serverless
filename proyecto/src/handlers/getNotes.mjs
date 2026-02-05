@@ -54,9 +54,10 @@ export const handler = async (event) => {
   } catch (err) {
     console.log("Error", err);
     // Si la consulta genera error, devolvemos una descripción del error y código 400, con el mismo formato
+    var errorMessage = { message: "Ha habido un problema al leer las notas" };
     response = {
       statusCode: 400,
-      body: JSON.stringify(err),
+      body: JSON.stringify(errorMessage),
     };
   }
 

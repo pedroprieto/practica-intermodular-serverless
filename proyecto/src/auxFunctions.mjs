@@ -1,5 +1,4 @@
 // Clientes para interactuar con la API de AWS
-
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DynamoDBDocumentClient,
