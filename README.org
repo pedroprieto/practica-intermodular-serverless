@@ -222,6 +222,8 @@ Para instalar las *librerías y dependencias de la aplicación*, sitúate en la 
   npm install
 #+end_src
 
+Ese comando creará una carpeta denominada ~node_modules~ con las dependencias del proyecto.
+
 A continuación, para realizar el despliegue, ejecuta el siguiente comando:
 #+begin_src bash
   sam deploy --guided
