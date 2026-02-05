@@ -9,18 +9,7 @@ Utilizaremos la *Landing Zone* para realizar esta práctica.
 Esta práctica está basada en la aplicación *Polly Notes* del curso de AWS Developing.
 #+end_quote
 
-Esta práctica tiene como objetivo *desarrollar una aplicación serverless* en AWS. Los servicios y tecnologías a utilizar serán:
-- Lambda
-- API Gateway
-- DynamoDB
-- S3
-- Polly
-- Translate
-- SAM
-- Cloudwatch
-- XRay
-
-La aplicación que desarrollaremos será una *aplicación web completa*, formada por un *frontend* creado como *Aplicación de una sola página*, o /Single Page Application/ (SPA), y un *backend* compuesto de una *API REST*. La aplicación permitirá al usuario realizar operaciones *CRUD* (/Create/, /Read/, /Update/ y /Delete/) sobre un *conjunto de notas*. Además, también podrá activar un *procesamiento* sobre cada nota, consistente en *sintetizar audio* a partir del texto y *traducir* el texto de la nota a otro idioma.
+Esta práctica tiene como objetivo *desarrollar una aplicación serverless* en AWS. La aplicación que desarrollaremos será una *aplicación web completa*, formada por un *frontend* creado como *Aplicación de una sola página*, o /Single Page Application/ (SPA), y un *backend* compuesto de una *API REST*. La aplicación permitirá al usuario realizar operaciones *CRUD* (/Create/, /Read/, /Update/ y /Delete/) sobre un *conjunto de notas*. Además, también podrá activar un *procesamiento* sobre cada nota, consistente en *sintetizar audio* a partir del texto y *traducir* el texto de la nota a otro idioma.
 
 ** Esquema de la aplicación
 #+begin_src plantuml :file ./imagenes/00-arquitectura.png :exports results
