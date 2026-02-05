@@ -148,7 +148,7 @@ Para realizar la entrega de la práctica, haz una *Pull Request* cuando hayas fi
 
 [[./imagenes/03-fork.gif]]
 
-Por último, es posible que realicemos *cambios en el enunciado* o añadamos nuevo contenido al repositorio. Puedes comprobar si hay cambios nuevos pulsando en el botón ~Sync fork~ de tu repositorio. Acuérdate de sincronizar antes de cada fase, o si recibes indicaciones de los profesores.
+Por último, es posible que realicemos *cambios en el enunciado* o añadamos nuevo contenido al repositorio. Puedes comprobar si hay cambios nuevos pulsando en el botón ~Sync fork~ de tu repositorio. Acuérdate de sincronizar antes de cada fase, o si recibes indicaciones de los profesores. Una vez sincronizado tu repositorio en GitHub, *deberás sincronizar a continuación tu copia local* desde Visual Studio Code.
 
 #+begin_quote
 [!IMPORTANT]
