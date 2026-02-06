@@ -313,6 +313,11 @@ En el diagrama de arquitectura inicial puedes ver qué *métodos* de API serán 
 
 #+begin_quote
 [!NOTE]
+Recuerda que la función ~processNote~ necesitará permisos adicionales aparte del acceso a la tabla de DynamoDB.
+#+end_quote
+
+#+begin_quote
+[!NOTE]
 En los archivos de código se ha marcado con ~TODO~ los puntos donde se debería añadir código.
 #+end_quote
 
