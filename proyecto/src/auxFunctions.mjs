@@ -93,5 +93,19 @@ async function uploadToS3(mp3Data, key) {
 
 // TODO: Añadir el resto de funciones necesarias de lógica de negocio
 
+// Función para crear una nota para un usuario
+async function deleteNote(userId, noteId) {
+  // Parámetros de la petición de DynamoDB
+  // Petición PUT indicando la clave primaria: partición + ordenación
+  var params = {
+    TableName: tableName,
+    Item: { userId: userId, noteId: noteId, text: noteText },
+  };
+
+  // Petición a DynamoDB
+  const data = await ddbDocClient.send(new PutCommand(params));
+  return data;
+}
+
 // TODO: Exportar las funciones creadas
-export { getNotesByUser, postNoteForUser, textToSpeech, uploadToS3 };
+export { getNotesByUser, postNoteForUser, textToSpeech, uploadToS3, deleteNote };
